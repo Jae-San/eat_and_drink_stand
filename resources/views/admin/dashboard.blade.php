@@ -21,18 +21,11 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach ($demandes as $user)
-                    <tr>
-                        <td>{{ $user->id }}</td>
-                        <td>{{ $user->nom_entreprise }}</td>
-                        <td>{{ $user->email }}</td>
-                        <td>
-                            <form method="POST" action="{{ route('admin.approuver', $user->id) }}">
-                                @csrf
-                                <button type="submit">✅ Approuver</button>
-                            </form>
-                        </td>
-                    </tr>
+                @foreach($demandes as $demande)
+                    <li>
+                        {{ $demande->nom_entreprise }} - {{ $demande->email }}
+                        <a href="{{ route('admin.approuver', $demande->id) }}"> Approuver</a>
+                    </li>
                 @endforeach
             </tbody>
         </table>

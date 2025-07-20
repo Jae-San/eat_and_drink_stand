@@ -20,16 +20,16 @@ class AdminController extends Controller
         // On passe ces utilisateurs à la vue dashboard
         return view('admin.dashboard', compact('demandes'));
     }
+    
 
-    // Fonction pour approuver un entrepreneur
     public function approuver($id)
     {
-        $user = User::find($id);
-        if ($user && $user->role === 'entrepreneur_en_attente') {
-            $user->role = 'entrepreneur_approuve';
-            $user->save();
-        }
-
-        return redirect()->route('admin.dashboard')->with('success', 'Demande approuvée.');
+        $user = User::findOrFail($id);
+       
+        // Mettre à jour le rôle
+        $user->role = 'entrepreneur_approuve';
+        $user->save();
+    
+        return redirect()->route('admin.dashboard')->with('success', 'Demande approuvée avec succès.');
     }
 }
