@@ -16,6 +16,10 @@
                         {{ __('Dashboard') }}
                     </x-nav-link>
                 </div>
+                <form action="{{ route('search') }}" method="GET" style="display:inline-block;">
+                    <input type="text" name="q" placeholder="Rechercher un stand ou un produit..." required>
+                    <button type="submit">Rechercher</button>
+                </form>
             </div>
 
             <!-- Settings Dropdown -->
@@ -96,5 +100,6 @@
                 </form>
             </div>
         </div>
+
     </div>
 </nav>

@@ -34,3 +34,15 @@
     @endif
 </div>
 @endsection
+
+@section('content')
+<div class="container">
+    <h1>Tableau de bord Administrateur</h1>
+
+    <div class="mt-4">
+        <a href="{{ route('admin.commandes.index') }}" class="btn btn-primary">
+            Voir les Commandes
+        </a>
+    </div>
+</div>
+@endsection
