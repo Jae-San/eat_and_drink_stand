@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\StandController;
+
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\SearchController;
 use App\Http\Controllers\Admin\CommandeController;
@@ -35,6 +36,17 @@ Route::middleware(['auth', 'check.role:entrepreneur'])->group(function () {
 });
 
 Route::get('/admin/approuver/{id}', [AdminController::class, 'approuver'])->name('admin.approuver');
+Route::post('/admin/rejeter/{id}', [AdminController::class, 'rejeter'])->name('admin.rejeter');
+
+Route::get('/attente', function() {
+    return view('auth.attente');
+})->name('attente');
+Route::get('/rejet', function() {
+    $motif = auth()->user()->motif_rejet ?? null;
+    return view('auth.rejet', compact('motif'));
+})->name('rejet');
+
+Route::get('/stands', [StandController::class, 'index'])->name('stands.index');
 
 
 // Page vitrine : liste des exposants

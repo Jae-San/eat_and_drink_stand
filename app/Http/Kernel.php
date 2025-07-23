@@ -56,5 +56,6 @@ class Kernel extends HttpKernel
 
         // 🎯 Ton middleware personnalisé
         'admin' => \App\Http\Middleware\AdminMiddleware::class,
+        'check.role' => \App\Http\Middleware\CheckRole::class,
     ];
 }

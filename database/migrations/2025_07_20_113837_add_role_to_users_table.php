@@ -9,6 +9,7 @@ return new class extends Migration {
     {
         Schema::table('users', function (Blueprint $table) {
             $table->string('role')->default('entrepreneur_en_attente');
+            $table->string('motif_rejet')->nullable();
         });
     }
 
@@ -16,6 +17,7 @@ return new class extends Migration {
     {
         Schema::table('users', function (Blueprint $table) {
             $table->dropColumn('role');
+            $table->dropColumn('motif_rejet');
         });
     }
 };
