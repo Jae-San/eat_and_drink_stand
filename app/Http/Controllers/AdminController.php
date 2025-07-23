@@ -24,12 +24,17 @@ class AdminController extends Controller
 
     public function approuver($id)
     {
-        $user = User::findOrFail($id);
-       
-        // Mettre à jour le rôle
+        $user = \App\Models\User::findOrFail($id);
         $user->role = 'entrepreneur_approuve';
         $user->save();
-    
-        return redirect()->route('admin.dashboard')->with('success', 'Demande approuvée avec succès.');
+        return redirect()->back()->with('success', 'Utilisateur approuvé avec succès.');
+    }
+
+    public function rejeter($id)
+    {
+        $user = \App\Models\User::findOrFail($id);
+        $user->role = 'entrepreneur_rejete';
+        $user->save();
+        return redirect()->back()->with('success', 'Utilisateur rejeté.');
     }
 }
