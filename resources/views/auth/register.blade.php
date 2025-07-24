@@ -7,6 +7,11 @@
             <x-input-error :messages="$errors->get('name')" class="mt-2" />
         </div>
         <div class="mt-4">
+            <x-input-label for="nom_stand" :value="__('Nom du stand ou de l\'entreprise')" />
+            <x-text-input id="nom_stand" class="block mt-1 w-full" type="text" name="nom_stand" :value="old('nom_stand')" required autocomplete="organization" />
+            <x-input-error :messages="$errors->get('nom_stand')" class="mt-2" />
+        </div>
+        <div class="mt-4">
             <x-input-label for="email" :value="__('Email')" />
             <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autocomplete="username" />
             <x-input-error :messages="$errors->get('email')" class="mt-2" />

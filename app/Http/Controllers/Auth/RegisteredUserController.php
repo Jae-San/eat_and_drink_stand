@@ -17,8 +17,21 @@ class RegisteredUserController extends Controller
     /**
      * Display the registration view.
      */
-    public function create(): View
+    public function create(): View|RedirectResponse
     {
+        if (auth()->check()) {
+            $user = auth()->user();
+            if ($user->role === 'admin') {
+                return redirect()->route('admin.dashboard');
+            } elseif ($user->role === 'entrepreneur_approuve') {
+                return redirect()->route('entrepreneur.dashboard');
+            } elseif ($user->role === 'entrepreneur_en_attente') {
+                return redirect()->route('attente');
+            } elseif ($user->role === 'entrepreneur_rejete') {
+                return redirect()->route('rejet');
+            }
+            return redirect('/');
+        }
         return view('auth.register');
     }
 
@@ -51,12 +64,8 @@ class RegisteredUserController extends Controller
 
         event(new Registered($user));
 
-        if ($user->role === 'entrepreneur_en_attente') {
-            Auth::logout();
-            return redirect()->route('attente');
-        }
-
-        Auth::login($user);
-        return redirect(route('dashboard', absolute: false));
+        // Toujours déconnecter après inscription, car il faut attendre l'approbation
+        Auth::logout();
+        return redirect()->route('attente')->with('message', "Votre compte est en attente d'approbation par un administrateur.");
     }
 }
