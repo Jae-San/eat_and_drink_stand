@@ -1,4 +1,8 @@
 <x-guest-layout>
+    <div class="mb-6 text-center">
+        <h2 class="text-3xl font-extrabold text-indigo-700 mb-2">Connexion</h2>
+        <p class="text-gray-500">Ravi de vous revoir ! Connectez-vous à votre compte.</p>
+    </div>
     <x-auth-session-status class="mb-4" :status="session('status')" />
     <form method="POST" action="{{ route('login') }}">
         @csrf
@@ -8,24 +12,24 @@
             <x-input-error :messages="$errors->get('email')" class="mt-2" />
         </div>
         <div class="mt-4">
-            <x-input-label for="password" :value="__('Password')" />
+            <x-input-label for="password" :value="__('Mot de passe')" />
             <x-text-input id="password" class="block mt-1 w-full" type="password" name="password" required autocomplete="current-password" />
             <x-input-error :messages="$errors->get('password')" class="mt-2" />
         </div>
         <div class="block mt-4">
             <label for="remember_me" class="inline-flex items-center">
                 <input id="remember_me" type="checkbox" class="rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500" name="remember">
-                <span class="ml-2 text-sm text-gray-600">{{ __('Remember me') }}</span>
+                <span class="ml-2 text-sm text-gray-600">{{ __('Se souvenir de moi') }}</span>
             </label>
         </div>
-        <div class="flex items-center justify-end mt-4">
+        <div class="flex items-center justify-between mt-6">
             @if (Route::has('password.request'))
-                <a class="underline text-sm text-gray-600 hover:text-gray-900" href="{{ route('password.request') }}">
-                    {{ __('Forgot your password?') }}
+                <a class="underline text-sm text-gray-600 hover:text-indigo-700 transition" href="{{ route('password.request') }}">
+                    {{ __('Mot de passe oublié ?') }}
                 </a>
             @endif
             <x-primary-button class="ml-3">
-                {{ __('Log in') }}
+                {{ __('Se connecter') }}
             </x-primary-button>
         </div>
     </form>
